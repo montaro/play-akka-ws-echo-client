@@ -10,7 +10,7 @@ import org.eclipse.jetty.websocket.client.{ClientUpgradeRequest, WebSocketClient
 import utils.SimpleEchoSocket
 import java.net.URI
 
-class Robb(url: String, sword: Long) extends Actor with ActorLogging {
+class Robb(url: String, sword: Long, socket: SimpleEchoSocket) extends Actor with ActorLogging {
 
   override def preStart() = {
     log.info("Robb fork is starting")
@@ -24,7 +24,7 @@ class Robb(url: String, sword: Long) extends Actor with ActorLogging {
 
   def wsConnect(url: String): Unit = {
     val client: WebSocketClient = new WebSocketClient()
-    val socket: SimpleEchoSocket = new SimpleEchoSocket()
+
     try {
       client.start()
       val echoUri: URI = new URI(url)
